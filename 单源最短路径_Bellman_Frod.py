@@ -5,11 +5,11 @@ class Edge:
         self.weight = weight
 
 
-def trace(x, path):
-    if x == 0:
-        return path
-    else:
-        return trace(pre[x], chr(pre[x] + 97) + '->' + path)
+# def trace(x, path):
+#     if x == 0:
+#         return path
+#     else:
+#         return trace(pre[x], chr(pre[x] + 97) + '->' + path)
 
 
 n, m = map(int, input().split())
@@ -23,7 +23,7 @@ pre = [i for i in range(n)]
 d[0] = 0
 for _ in range(n - 1):
     for edge in edges:
-        if d[edge.from_] != 0x3f3f3f3f and d[edge.to_] >= d[edge.from_] + edge.weight:
+        if d[edge.from_] != 0x3f3f3f3f and d[edge.to_] > d[edge.from_] + edge.weight:
             d[edge.to_] = d[edge.from_] + edge.weight
             pre[edge.to_] = edge.from_
 
@@ -37,7 +37,8 @@ if if_negative:
 else:
     for i in range(1, n):
         if d[i] != 0x3f3f3f3f:
-            print('{}: {}'.format(d[i], trace(i, chr(i + 97))))
+            # print('{}: {}'.format(d[i], trace(i, chr(i + 97))))
+            print('{}: {}'.format('a->' + chr(i + 97), d[i]))
 
 
 """
